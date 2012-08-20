@@ -1,0 +1,10 @@
+fieldset
+	.control-group
+		label.control-label Title:
+		.controls
+			input(name='document[title]', value=d.title || '')
+	.control-group
+		label.control-label Body:
+		.controls
+			textarea(name='document[body]', id='pagebody')
+				=d.body || ''

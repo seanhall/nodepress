@@ -1,0 +1,15 @@
+.row
+	form.form-horizontal(method='post', action='/posts')
+		.span8
+			.well
+				h2 New Post
+					!=partial('posts/fields', { locals: { d: d, f: f } })
+		.span4
+			.well
+				h4 Publish
+			.well
+				h4 Categories
+					select(name='document[categories]')
+						- for (i=0;i<f.length;i++)
+							option(value=f[i].name)
+								=f[i].name

@@ -1,0 +1,23 @@
+- var postcats = d.categories
+script(src='/javascripts/tinyeditor/tiny.editor.packed.js')
+link(rel='stylesheet', href='/javascripts/tinyeditor/tinyeditor.css')
+.row
+	form#postedit.form-horizontal(method='post', action='/posts/' + d.id)
+		.span8
+			.well
+				h2 Edit Post
+					!=partial('posts/fields', { locals: { d: d, f: f } })
+					input(name='document[id]', value=d.id, type='hidden')
+					input(name='_method', value='PUT', type='hidden')
+		.span4
+			.well
+				h4 Publish
+			.well
+				h4 Categories
+					select(id='postcategories', name='document[categories]')
+						- for (i=0;i<f.length;i++)
+							option(value=f[i].name)
+								=f[i].name
+script
+	$('#postcategories').children('option[value=#{postcats}]').attr('selected','selected')
+	TE('postbody')

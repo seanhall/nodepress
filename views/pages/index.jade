@@ -1,0 +1,31 @@
+.row
+	.well
+		h2 Your Pages
+
+		table.table.table-striped.doclist
+			thead
+				tr
+					th Title
+					th Comments
+					th Date
+			tbody
+			- for (var d in documents)
+				tr.pagerow
+					td(id=documents[d].id)
+						a.doclink(href='/pages/' + documents[d].id + '/edit')
+							=documents[d].title
+						p.post.actions
+							a(href='/pages/' + documents[d].id + '/edit') Edit
+							span  | 
+							a.destroy(href='#') Delete
+					td
+						=pagecomments[d] || '0'
+					td
+						if documents[d].modified
+							=montharray[documents[d].modified.getMonth()] + ' ' + documents[d].modified.getDate() + ', ' + documents[d].modified.getFullYear()
+							br
+							span Last Modified
+						else
+							=montharray[documents[d].created.getMonth()] + ' ' + documents[d].created.getDate() + ', ' + documents[d].created.getFullYear()
+							br
+							span Created

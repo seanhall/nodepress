@@ -1,0 +1,13 @@
+fieldset
+	.control-group
+		label.control-label Title:
+		.controls
+			input(name='document[title]', value=d.title || '')
+	.control-group
+		label.control-label Body:
+		.controls
+			textarea(name='document[body]', id='postbody')
+				=d.body || ''
+	.control-group
+		button#savepost.btn(type='submit') Save Draft
+		button#postsubmit.btn(type='submit') Publish

@@ -1,0 +1,37 @@
+script(src='/javascripts/tinyeditor/tiny.editor.packed.js')
+link(rel='stylesheet', href='/javascripts/tinyeditor/tinyeditor.css')
+.row
+	form#pageedit.form-horizontal(method='post', action='/pages/' + d.id)
+		.span8
+			.well
+				h2 Edit Page
+					!=partial('pages/fields', { locals: { d: d, f: f } })
+					input(name='document[id]', value=d.id, type='hidden')
+					input(name='_method', value='PUT', type='hidden')
+		.span4
+			.well
+				h4 Publish
+					.control-group
+						button#savepost.btn(type='submit') Save Draft
+						//button#postsubmit.btn(type='submit') Publish
+				div Visibility: 
+					=d.visibility
+				div.float
+					div.rtcol.left
+						a(href='#') Trash
+					div.rtcol.right
+						button.btn(type='submit') Publish
+			.well
+				h4 Page Attributes
+				div Parent:
+					br
+					select
+						option (no parent)
+						- for(var i in f)
+							option
+								=f[i].title
+				div Order:
+					br
+					input(type='text', name='document[order]', value=d.order || 0)
+script
+	TE('pagebody')

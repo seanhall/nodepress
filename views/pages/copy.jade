@@ -1,0 +1,6 @@
+.row
+	.well
+		h2 Copy a Page
+		- for(i=0;i<d.length;i++)
+			a.pagecopylink(href='/pages/' + d[i].id + '/copy', id=d[i].id)
+				=d[i].title

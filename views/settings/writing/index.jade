@@ -1,0 +1,33 @@
+.row
+	.well
+		h2 Writing Settings
+		form#setwriting.form-horizontal(method='post', action='/settings/writing/save')
+			input(name='_method', value='PUT', type='hidden')
+			fieldset
+				.control-group
+					label.control-label Default Post Category:
+					.controls
+						select#def_post_cat(name='document[def_post_cat]')
+							-for(var i in f)
+								option(value=f[i].name)
+									=f[i].name
+				.control-group
+					label.control-label Default Post Format:
+					.controls
+						select#def_post_format(name='document[def_post_format]')
+							option(value='Standard') Standard
+							option(value='Aside') Aside
+				.control-group
+					label.control-label Default Link Category:
+					.controls
+						select#def_link_cat(name='document[def_link_cat]')
+							option(value='Blogroll') Blogroll
+							-for(var i in g.categories)
+								option(value=g[i].name)
+									=g[i].name
+				.control-group
+					button.btn(type='submit') Save Changes
+script
+	$('select#def_post_cat').val('#{d.writing.def_post_cat}');
+	$('select#def_post_format').val('#{d.writing.def_post_format}');
+	$('select#def_link_cat').val('#{d.writing.def_link_cat}');

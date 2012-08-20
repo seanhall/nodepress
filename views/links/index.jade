@@ -1,0 +1,25 @@
+.row
+	.well
+		h2 Links
+
+		table.table.table-striped.doclist
+			thead
+				tr
+					th Name
+					th URL
+					th Rating
+			tbody
+			- for (var d in documents)
+				tr.linkrow
+					td(id=documents[d].id)
+						a.doclink(href='/links/' + documents[d].id + '/edit')
+							=documents[d].name
+						p.link.actions
+							a(href='/links/' + documents[d].id + '/edit') Edit
+							span  | 
+							a.destroy(href='#') Trash
+					td
+						a(href=documents[d].webaddr, target='_blank')
+							=documents[d].webaddr
+					td
+						=documents[d].rating

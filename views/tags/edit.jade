@@ -1,0 +1,7 @@
+h2 Edit Tag
+form(method='post', action='/tags/' + d.id)
+	input(name='document[id]', value=d.id, type='hidden')
+	input(name='_method', value='PUT', type='hidden')
+	!=partial('tags/fields', { locals: { documents: d } })
+	.control-group
+		button(type='submit') Update

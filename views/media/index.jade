@@ -1,0 +1,24 @@
+.row
+	.well
+		h2 Media Library
+
+		table.table.table-striped.doclist
+			thead
+				tr
+					th File
+					th Comments
+					th Date
+			tbody
+			- for (var d in documents)
+				tr.mediarow
+					td(id=documents[d].id)
+						a.doclink(href='/media/' + documents[d].id + '/edit')
+							=documents[d].name
+						p.post.actions
+							a(href='/media/' + documents[d].id + '/edit') Edit
+							span  | 
+							a.destroy(href='#') Delete
+					td
+						=mediacomments[d] || '0'
+					td
+						=montharray[documents[d].created.getMonth()] + ' ' + documents[d].created.getDate() + ', ' + documents[d].created.getFullYear()

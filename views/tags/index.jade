@@ -1,0 +1,30 @@
+.row
+	.span5
+		.well
+			h2 Add New Tag
+			form.form-horizontal(method='post', action='/tags')
+				!=partial('tags/fields', { locals: { documents: documents } })
+				.control-group
+					button(type='submit') Add New Tag
+	.span7
+		.well
+
+			table.table.table-striped.doclist
+				thead
+					tr
+						th Name
+						th Description
+						th Posts
+				tbody
+				- for (var d in documents)
+					tr.tagrow
+						td(id=documents[d].id)
+							a.doclink(href='/tags/' + documents[d].id + '/edit')
+								=documents[d].name
+							p.tag.actions
+								a(href='/tags/' + documents[d].id + '/edit') Edit
+								span  | 
+								a.destroy(href='#') Delete
+						td
+							=documents[d].desc
+						td 

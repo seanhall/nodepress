@@ -1,0 +1,28 @@
+- var catpar = documents.parent
+fieldset
+	.control-group
+		label.control-label Name:
+		.controls
+			input(name='document[name]', value=documents.name || '')
+	.control-group
+		label.control-label Parent:
+		.controls
+			select(id='catparent', name='document[parent]')
+				option(value='') None
+				if documents.length && documents.length > 0
+					- for (i=0;i<documents.length;i++)
+						option(value=documents[i].name)
+							=documents[i].name
+				else if g.length && g.length > 0
+					- for (i=0;i<g.length;i++)
+						option(value=g[i].name)
+							=g[i].name
+				else
+					option(value='Uncategorized') Uncategorized
+	.control-group
+		label.control-label Description:
+		.controls
+			textarea(name='document[desc]')
+				=documents.desc || ''
+script
+	$('#catparent').children('option[value=#{catpar}]').attr('selected','selected')

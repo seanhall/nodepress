@@ -1,0 +1,88 @@
+!!!
+html
+	head
+		title= 'Nodepad'
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='/javascripts/jquery-1.7.1.min.js')
+		script(src='/javascripts/bootstrap.min.js')
+		script(src='/javascripts/ui.js')
+		script(src='/javascripts/application.js')
+		script			
+			var montharray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+	body
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container
+					.nav-collapse
+						ul.nav
+							li.active
+								a(href='#') Log In
+							li
+								a(href='#about') About
+							li
+								a(href='#contact') Contact
+
+
+
+
+		.container	
+			ul.nav.nav-tabs
+				li#home.dropdown
+					a#homelink(href='/') Dashboard
+				li#posts.dropdown
+					a#postlink.dropdown-toggle(data-toggle='dropdown', href='#posts') Posts
+						b.caret
+					ul#postdrop.dropdown-menu
+						li
+							a(href='/posts') All Posts
+							a(href='/posts/new') Add New
+							a(href='/categories') Categories
+							a(href='/tags') Tags
+				li#pages.dropdown
+					a#pagelink.dropdown-toggle(data-toggle='dropdown', href='#pages') Pages
+						b.caret
+					ul#pagedrop.dropdown-menu
+						li
+							a(href='/pages') All Pages
+							a(href='/pages/new') Add New
+							//a(href='/pages/copy') Copy
+				//li#comments
+					a#commentlink(href='/comments') Comments
+				li#media.dropdown
+					a#medialink.dropdown-toggle(data-toggle='dropdown', href='#media') Media
+						b.caret
+					ul#mediadrop.dropdown-menu
+						li
+							a(href='/media') Library
+							a(href='/media/new') Add New
+				li#links.dropdown
+					a#linklink.dropdown-toggle(data-toggle='dropdown', href='#links') Links
+						b.caret
+					ul#linkdrop.dropdown-menu
+						li
+							a(href='/links') All Links
+							a(href='/links/new') Add New
+							//a(href='/links/categories') Link Categories
+				//li#feedback
+					a#feedbacklink(href='/feedback') Feedback
+				//li#users.dropdown
+					a#userlink.dropdown-toggle(data-toggle='dropdown', href='#users') Users
+						b.caret
+					ul#userdrop.dropdown-menu
+						li
+							a(href='/users') All Users
+							a(href='/users/invite') Invite New
+				li#settings.dropdown
+					a#settingslink.dropdown-toggle(data-toggle='dropdown', href='#settings') Settings
+						b.caret
+					ul#settingdrop.dropdown-menu
+						li
+							a(href='/settings/general') General
+							a(href='/settings/writing') Writing
+							a(href='/settings/reading') Reading
+							//a(href='/settings/discussion') Discussion
+				
+			.content
+
+				!= body

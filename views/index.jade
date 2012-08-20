@@ -1,0 +1,57 @@
+- var postind = count  === 1 ? 'Post' : 'Posts'
+- var pageind = count2 === 1 ? 'Page' : 'Pages'
+- var catind  = count3 === 1 ? 'Category' : 'Categories'
+- var tagind  = count4 === 1 ? 'Tag'  : 'Tags'
+- var commind = count5 === 1 ? 'Comment'  : 'Comments'
+
+.home.row
+	.span6
+		.well
+			.stats
+				h3 Right Now:
+				table(width='100%')
+					tr
+						td(width='50%')
+							h4 Content
+						td(width='50%')
+							h4 Discussion
+					tr
+						td
+							p #{count} #{postind}
+						td
+							p #{count5} #{commind}
+					tr
+						td
+							p #{count2} #{pageind}
+						td
+							p #{count6} Approved
+					tr
+						td
+							p #{count3} #{catind}
+						td
+							p #{count7} Pending
+					tr
+						td
+							p #{count4} #{tagind}
+						td
+							p #{count8} Spam
+		.well
+			h3 Your Stuff
+			p New post: 
+				=recentposts[0].body
+				&nbsp;
+				a(class='action button', href='/posts/' + recentposts[0].id + '/edit') (Edit)
+	.span6
+		.well
+			h3 Quick Post
+			form#quickpost.form-horizontal(method='post', action='/posts')
+				!=partial('posts/fields', { locals: { d: '' } })
+		.well
+			h3 Recent Drafts
+			if recentdrafts.length > 0
+				p
+					a(href='/posts/#{recentdrafts[0]._id}/edit')=recentdrafts[0].title
+					span.postdate=' ' + montharray[recentdrafts[0].created.getMonth()] + ' ' + recentdrafts[0].created.getDate() + ', ' + recentdrafts[0].created.getFullYear()
+				p=recentdrafts[0].body
+			else
+				p There are no drafts at the moment

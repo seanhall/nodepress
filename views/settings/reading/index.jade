@@ -1,0 +1,38 @@
+.row
+	.well
+		h2 Writing Settings
+		form#setreading.form-horizontal(method='post', action='/settings/reading/save')
+			input(name='_method', value='PUT', type='hidden')
+			fieldset
+				.control-group
+					label.control-label Front page displays:
+					.controls
+						label
+							input(type='radio', name='document[fpage_display]', value='latest')
+							span Your latest posts
+						label
+							input(type='radio', name='document[fpage_display]', value='static')
+							span A static page (select below)
+						span Front page: 
+						select#fpage(name='document[fpage]')
+							option --Select--
+							- for(var i in f)
+								option(value=f[i].title)
+									=f[i].title
+						span Posts page: 
+						select(name='document[ppage]')
+							option --Select--
+							- for(var i in f)
+								option(value=f[i].title)
+									=f[i].title
+				.control-group
+					label.control-label Blog pages show at most:
+					.controls
+						input(type='number', step='1', min='1', name='document[num_posts]', value=d.reading.num_posts || 10)
+						span  posts
+				.control-group
+					button.btn(type='submit') Save Changes
+script
+	$('input[name=document[fpage_display]]').val('#{d.reading.fpage_display}');
+	$('select#fpage').val('#{d.reading.fpage}');
+	$('select#ppage').val('#{d.reading.ppage}');

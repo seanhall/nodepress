@@ -1,0 +1,30 @@
+.row
+	.span5
+		.well
+			h2 New Category
+			form.form-horizontal(method='post', action='/categories')
+				!=partial('categories/fields', { locals: { documents: documents } })
+				.control-group
+					button(type='submit') Add New Category
+	.span7
+		.well
+
+			table.table.table-striped.doclist
+				thead
+					tr
+						th Name
+						th Description
+						th Posts
+				tbody
+				- for (var d in documents)
+					tr.catrow
+						td(id=documents[d].id)
+							a.doclink(href='/categories/' + documents[d].id + '/edit')
+								=documents[d].name
+							p.cat.actions
+								a(href='/categories/' + documents[d].id + '/edit') Edit
+								span  | 
+								a.destroy(href='#') Delete
+						td
+							=documents[d].desc
+						td 

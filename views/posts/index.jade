@@ -1,0 +1,41 @@
+.row
+	.well
+		h2 Your Posts
+
+		table.table.table-striped.doclist
+			thead
+				tr
+					th Title
+					th Categories
+					th Tags
+					th Comments
+					th Date
+			tbody
+			- for (var d in documents)
+				if documents[d].trashed !== true
+					tr.postrow
+						td(id=documents[d].id)
+							a.doclink(href='/posts/' + documents[d].id + '/edit')
+								=documents[d].title
+							p.post.actions
+								a(href='/posts/' + documents[d].id + '/edit') Edit
+								span  | 
+								a.destroy(href='#') Trash
+						td
+							=documents[d].categories
+						td
+							if documents[d].tags.length === 0
+								span No Tags
+							else
+								=documents[d].tags
+						td
+							=postcomments[d] || '0'
+						td
+							if documents[d].modified
+								=montharray[documents[d].modified.getMonth()] + ' ' + documents[d].modified.getDate() + ', ' + documents[d].modified.getFullYear()
+								br
+								span Last Modified
+							else
+								=montharray[documents[d].created.getMonth()] + ' ' + documents[d].created.getDate() + ', ' + documents[d].created.getFullYear()
+								br
+								span Created

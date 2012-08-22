@@ -1,0 +1,12 @@
+.container
+	h1 Your Pages
+
+	ul.doclist
+		- for (var d in documents)
+			li
+				a.doclink(href='/pages/' + documents[d].id)
+					=documents[d].title
+				a(class='action button', href='/pages/' + documents[d].id + '/edit') Edit
+				a(class='action button destroy', href='/pages/' + documents[d].id) Delete
+		li.newdoc
+			a(class='button', href='/pages/new') + New Page

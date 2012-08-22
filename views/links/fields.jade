@@ -1,0 +1,53 @@
+fieldset
+	.control-group
+		label.control-label Name:
+		.controls
+			input(name='document[name]', value=d.name || '')
+	.control-group
+		label.control-label Web Address:
+		.controls
+			input(name='document[webaddr]', value=d.webaddr || '')
+	.control-group
+		label.control-label Description:
+		.controls
+			input(name='document[desc]', value=d.desc || '')
+	.control-group
+		label.control-label Target:
+		.controls
+			label
+				input(type='radio', name='document[target]', value='blank')
+				span _blank &#8212; new window or tab
+				input(type='radio', name='document[target]', value='top')
+				span _top &#8212; current window or tab, with no frames
+				input(type='radio', name='document[target]', value='none')
+				span _none &#8212; same window or tab
+	.control-group
+		label.control-label Notes:
+		.controls
+			textarea(name='document[notes]')
+				=d.notes || ''
+	.control-group
+		label.control-label Rating:
+		.controls
+			select(name='document[rating]')
+				option 0
+				option(value='1')
+					=1
+				option(value='2')
+					=2
+				option(value='3')
+					=3
+				option(value='4')
+					=4
+				option(value='5')
+					=5
+				option(value='6')
+					=6
+				option(value='7')
+					=7
+				option(value='8')
+					=8
+				option(value='9')
+					=9
+				option(value='10')
+					=10

@@ -1,0 +1,78 @@
+body {
+  padding: 80px;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+}
+
+a {
+  color: #00B7FF;
+}
+.doclist li a{
+	margin-right: 40px;
+}
+.doclist li .doclink {
+	margin-right: 200px;
+}
+.doclist li .action {
+	text-decoration: underline;
+}
+.doclist .newdoc {
+	margin-top: 22px;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  background-image: url("/images/glyphicons-halflings.png");
+}
+
+
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+	width: 1020px;
+}
+.nav-list {
+	float:left;
+	width:160px;
+}
+.nav-list [class^="icon-"] {
+	float:left;
+	margin-right: 6px;
+}
+.nav-tabs{
+	margin-bottom:0;
+}
+.content{
+	/*width:860px;*/
+	padding:30px 38px 30px 39px;
+	border-left:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom-right-radius:8px;
+	border-bottom-left-radius:8px;
+}
+.form-horizontal .control-label {
+	width: 60px;
+	text-align: left;
+}
+.form-horizontal .controls {
+	margin-left: 60px;
+}
+input, textarea {
+width: 290px;
+}
+#savepost{
+	float:left;
+}
+#postsubmit{
+	float:right;
+}
+.actions{
+	visibility: hidden;
+}
+
+.float{
+	overflow:hidden;
+}
+.float .left{
+	float:left;
+}
+.float .right{
+	float:right;
+}

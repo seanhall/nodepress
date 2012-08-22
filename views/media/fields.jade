@@ -1,0 +1,30 @@
+fieldset
+	.control-group
+		label.control-label Title:
+		.controls
+			input(type='text', name='document[name]', value=d.name || '')
+	.control-group
+		label.control-label Alt Text:
+		.controls
+			input(type='text', name='document[alt]')
+	.control-group
+		label.control-label Caption:
+		.controls
+			textarea(type='text', name='document[caption]')
+				=d.caption || ''
+	.control-group
+		label.control-label Description:
+		.controls
+			textarea(type='text', name='document[desc]')
+				=d.desc || ''
+	if d.filename
+		.control-group
+			label.control-label File URL:
+			.controls
+				input(type='text', name='document[filename]', value=d.filename, readonly='readonly')
+	if !d.filename
+		.control-group
+			.controls
+				input(type='file', name='thumbnail')
+	.control-group
+		button#savemedia.btn(type='submit') Upload

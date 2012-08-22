@@ -1,0 +1,6 @@
+h2 Edit Media
+p
+form(method='post', action='/media/' + d.id)
+	input(name='document[id]', value=d.id, type='hidden')
+	input(name='_method', value='PUT', type='hidden')
+	!=partial('media/fields', { locals: { d: d } })

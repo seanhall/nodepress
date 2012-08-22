@@ -1,0 +1,13 @@
+.row
+	form.form-horizontal(method='post', action='/links')
+		.span8
+			.well
+				h2 Edit Link
+					!=partial('links/fields', { locals: { d: d } })
+		.span4
+			.well
+				h4 Save
+				input#privlink(type='checkbox', name='document[private]', value='true')
+				span Keep this link private				
+				.control-group
+					button.btn(type='submit') Add Link

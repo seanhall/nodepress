@@ -1,0 +1,7 @@
+h2 Edit Category
+form(method='post', action='/categories/' + d.id)
+	input(name='document[id]', value=d.id, type='hidden')
+	input(name='_method', value='PUT', type='hidden')
+	!=partial('categories/fields', { locals: { documents: f, g : d } })
+	.control-group
+		button(type='submit') Update

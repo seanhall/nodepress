@@ -1,0 +1,20 @@
+.row
+	.well
+		h2 General Settings
+		form#setgen.form-horizontal(method='post', action='/settings/general/save')
+			input(name='_method', value='PUT', type='hidden')
+			fieldset
+				.control-group
+					label.control-label Title:
+					.controls
+						input(name='document[sitetitle]', value=d.general.sitetitle || '')
+				.control-group
+					label.control-label Tagline:
+					.controls
+						input(name='document[tagline]', value=d.general.tagline || '')
+				.control-group
+					label.control-label Email Address:
+					.controls
+						input(name='document[email]', value=d.general.email || '')
+				.control-group
+					button.btn(type='submit') Save Changes

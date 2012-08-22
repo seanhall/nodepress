@@ -1,0 +1,31 @@
+.row
+	form.form-horizontal(method='post', action='/pages')
+		.span8
+			.well
+				h2 New Page
+					!=partial('pages/fields', { locals: { d: d, f: f } })
+		.span4
+			.well
+				h4 Publish
+					.control-group
+						button#savepost.btn(type='submit') Save Draft
+						//button#postsubmit.btn(type='submit') Publish
+				div Visibility: 
+					=d.visibility
+				div.float
+					div.rtcol.left
+						a(href='#') Trash
+					div.rtcol.right
+						button.btn(type='submit') Publish
+			.well
+				h4 Page Attributes
+				div Parent:
+					br
+					select
+						option (no parent)
+						- for(var i in f)
+							option
+								=f[i].title
+				div Order:
+					br
+					input(type='text', name='document[order]', value='0')

@@ -1,0 +1,5 @@
+.row
+	.well
+		h2 Upload New Media
+			form.form-horizontal(method='post', action='/media/upload', enctype='multipart/form-data')
+				!=partial('media/fields', { locals: { d: d } })

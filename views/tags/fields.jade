@@ -1,0 +1,10 @@
+fieldset
+	.control-group
+		label.control-label Name:
+		.controls
+			input(name='document[name]', value=documents.name || '')
+	.control-group
+		label.control-label Description:
+		.controls
+			textarea(name='document[desc]')
+				=documents.desc || ''

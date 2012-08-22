@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -7,9 +6,7 @@ var express = require('express'),
     app = module.exports = express.createServer(),
     mongoose = require('mongoose'),
     fs = require('fs'),
-    //db,
-    db = mongoose.connect('mongodb://localhost/nodepad'),
-    //routes = require('./routes');
+    db,
     Document;
 
 // Configuration
@@ -24,18 +21,18 @@ app.configure(function(){
 });
 
 app.configure('test', function(){
-  //db = mongoose.connect('mongodb://localhost/nodepad-test');
+  db = mongoose.connect('mongodb://localhost/nodepad-test');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('development', function(){
-  //db = mongoose.connect('mongodb://localhost/nodepad-development');
+  db = mongoose.connect('mongodb://localhost/nodepad-development');
   app.use(express.logger());
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  //db = mongoose.connect('mongodb://localhost/nodepad-production');
+  db = mongoose.connect('mongodb://localhost/nodepad');
   app.use(express.logger());
   app.use(express.errorHandler());
 });
@@ -80,9 +77,6 @@ app.get('/', function(req, res){
 });
 
 // Posts
-/*app.get('/posts', function(req, res){
-  getItems(Post,'posts',['id','title','body','tags'],res);
-});*/
 
 app.get('/posts', function(req,res){
   Post.find({trashed: false}, function(err, documents){
@@ -134,6 +128,7 @@ app.del('/posts/:id.:format?', function(req, res){
 // end Posts
 
 // Pages
+
 app.get('/pages', function(req, res){
   Page.find(function(err, documents){
     var pagecomments = [];
@@ -246,7 +241,6 @@ app.post('/media/upload', function(req,res){
       // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
       fs.unlink(tmp_path, function() {
           if (err) throw err;
-          //res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
       });
   });
   var document = new Media(req.body['document']);
@@ -266,7 +260,6 @@ app.post('/media/upload', function(req,res){
 app.del('/media/:id.:format?', function(req, res){
   deleteItem(Media,'media',req,res);
 });
-
 // end Media
 
 // Links
@@ -290,49 +283,13 @@ app.get('/links/:id.:format?/edit', function(req, res){
 app.put('/links/:id.:format?', function(req, res){
   saveEdit(Link,'links',req,res);
 });
-
 // end Links
 
-// Comments
-
-/*app.get('/comments', function(req, res){
-  getItems(Comment,'comments',req,res);
-});*/
-
-// end Comments
-
-// Feedback
-
-/*app.get('/feedback', function(req, res){
-  getItems(Feedback,'feedback',req,res);
-});*/
-
-// end Feedback
-
 // Categories
-
-/*app.get('/categories', function(req,res){
-  Category.find(function(err, documents){
-    res.render('categories/index.jade', {
-      locals: { documents: documents }
-    });
-  });
-});*/
 
 app.get('/categories', function(req, res){
   getItems(Category,'categories',req,res);
 });
-
-/*app.get('/categories', function(req, res){  
-  Category.find(function(err, documents){
-    for(var i in req.body){
-      documents[i] = req.body[i];
-    }
-    res.render('categories/index.jade', {
-      locals: { documents: documents }
-    });
-  });
-});*/
 
 app.post('/categories.:format?', function(req, res){
   createNewItem(Category,'categories',req,res);
@@ -355,7 +312,6 @@ app.put('/categories/:id.:format?', function(req, res){
 app.del('/categories/:id.:format?', function(req, res){
   deleteItem(Category,'categories',req,res);
 });
-
 // end Categories
 
 // Tags
@@ -379,16 +335,7 @@ app.put('/tags/:id.:format?', function(req, res){
 app.del('/tags/:id.:format?', function(req, res){
   deleteItem(Tag,'tags',req,res);
 });
-
 // end Tags
-
-// Users
-
-/*app.get('/users', function(req, res){
-  getItems(User,'users',req,res);
-});*/
-
-// end Users
 
 // Settings
 
@@ -410,8 +357,6 @@ app.get('/settings/general', function(req, res){
 app.put('/settings/general/save', function(req, res){
   Setting.update({}, { $set: {'general.sitetitle': req.body.document.sitetitle, 'general.tagline':req.body.document.tagline, 'general.email':req.body.document.email}}, {upsert: true}, function (err, numberAffected, raw) {
     if (err) return handleError(err);
-    //console.log('The number of updated documents was %d', numberAffected);
-    //console.log('The raw response from Mongo was ', raw);
     res.redirect('/settings/general');
   });
 });
@@ -438,8 +383,6 @@ app.get('/settings/writing', function(req, res){
 app.put('/settings/writing/save', function(req, res){
   Setting.update({}, { $set: {'writing.def_post_cat': req.body.document.def_post_cat, 'writing.def_post_format':req.body.document.def_post_format, 'writing.def_link_cat':req.body.document.def_link_cat}}, {upsert: true}, function (err, numberAffected, raw) {
     if (err) return handleError(err);
-    //console.log('The number of updated documents was %d', numberAffected);
-    //console.log('The raw response from Mongo was ', raw);
     res.redirect('/settings/writing');
   });
 });
@@ -464,37 +407,12 @@ app.get('/settings/reading', function(req, res){
 app.put('/settings/reading/save', function(req, res){
   Setting.update({}, { $set: {'reading.fpage_display': req.body.document.fpage_display, 'reading.fpage':req.body.document.fpage, 'reading.ppage':req.body.document.ppage, 'reading.num_posts':req.body.document.num_posts}}, {upsert: true}, function (err, numberAffected, raw) {
     if (err) return handleError(err);
-    //console.log('The number of updated documents was %d', numberAffected);
-    //console.log('The raw response from Mongo was ', raw);
     res.redirect('/settings/reading');
   });
 });
-
 // end Settings
 
 // Functions
-
-/*var getItems = function getItems(obj,dir,fields,res){
-  obj.find(function(err, documents){
-    documents = documents.map(function(d){
-      var fieldset = {};
-      for(i=0;i<fields.length;i++){
-        var field = fields[i];
-        if(field === 'id'){
-          fieldset[field] = d._id;
-        }
-        else{
-          fieldset[field] = d[field];
-        }
-      }
-      //console.log(fieldset);
-      return fieldset;
-    });
-    res.render(dir + '/index.jade', {
-      locals: { documents: documents }
-    });
-  });
-};*/
 
 var getItems = function getItems(obj,dir,req,res){
   obj.find(function(err, documents){
@@ -581,10 +499,6 @@ var deleteItem = function deleteItem(obj,dir,req,res){
     });
   });
 };
-
-
-
-
 
 
 app.listen(3000, function(){
